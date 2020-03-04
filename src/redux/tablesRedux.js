@@ -40,12 +40,17 @@ export const fetchFromAPI = () => {
   };
 };
 
-export const putToTablesStatus = (tableId, newStatus, newOrder) => {
+export const putToTablesStatus = (tables) => {
   return (dispatch, getState) => {
-    Axios.patch(`${api.url}/${api.tables}/${tableId}`, {status: newStatus, order: newOrder})
+    dispatch(fetchStarted());
+
+    Axios.patch(`${api.url}/${api.tables}/${tables}`, {tables})
       .then(res => {
         dispatch(postStatus(res.data));
       });
+    //.catch(err => {
+    //  dispatch(fetchError(err.message || true));
+    //});      
   };
 };
 

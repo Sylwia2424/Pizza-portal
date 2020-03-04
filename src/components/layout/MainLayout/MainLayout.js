@@ -7,7 +7,7 @@ import Container from '@material-ui/core/Container';
 
 
 const MainLayout = ({children}) => (
-  <div className="MainLayout">
+  <div>
     <AppBar>
       <Container maxWidth='lg'>
         <Toolbar disableGutters>

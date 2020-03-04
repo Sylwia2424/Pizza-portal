@@ -8,6 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
 
 class Waiter extends React.Component {
   static propTypes = {
@@ -24,63 +25,65 @@ class Waiter extends React.Component {
     const { fetchTables } = this.props;
     fetchTables();
   }
-  onClick(e, tableId, status, order) {
-    e.preventDefault();
-
-    if(status ==='free') {
-      status = 'thinking';
-    }
-    else if(status  === 'thinking'){
-      status = 'ordered'; 
-    }
-    else if(status  === 'ordered'){
-      status = 'prepared'; 
-    }
-    else if(status  === 'prepared'){
-      status = 'delivered'; 
-    }
-    else if(status  === 'delivered'){
-      status = 'paid'; 
-    }
-    else if(status  === 'paid'){
-      status = 'free'; 
-    }
-    this.props.postTableStatus(tableId, status, order);
+  waiterClicked(tableId, status){
+    this.props.postTableStatus(tableId, status);
   }
 
-  renderActions(status, id, order){
+  renderActions(status, tableId){
     switch (status) {
       case 'free':
         return (
           <>
-            <Button onClick={(e) => this.onClick(e, id, status, order)}>thinking</Button>
-            <Button onClick={(e) => this.onClick(e, id, status, order)}>new order</Button>
+            <Button component={Link} className={styles.button} color="primary" variant="outlined"
+              onClick={() => { this.waiterClicked(tableId, 'thinking'); }}>
+              thinking
+            </Button>
+            <Button component={Link} className={styles.button} color="primary" variant="outlined"
+              onClick={() => { this.waiterClicked(tableId, 'new order'); }}>
+              new order
+            </Button>
           </>
         );
       case 'thinking':
         return (
-          <Button onClick={(e) => this.onClick(e, id, status)}>new order</Button>
+          <Button component={Link} className={styles.button} color="primary" variant="outlined"
+            onClick={() => { this.waiterClicked(tableId, 'new order'); }}>
+            new order
+          </Button>
         );
       case 'ordered':
         return (
-          <Button onClick={(e) => this.onClick(e, id, status)}>prepared</Button>
+          <Button component={Link} className={styles.button} color="primary" variant="outlined"
+            onClick={() => { this.waiterClicked(tableId, 'prepared'); }}>
+          prepared
+          </Button>
         );
       case 'prepared':
         return (
-          <Button onClick={(e) => this.onClick(e, id, status)}>delivered</Button>
+          <Button component={Link} className={styles.button} color="primary" variant="outlined"
+            onClick={() => { this.waiterClicked(tableId, 'delivered'); }}>
+          delivered
+          </Button>
         );
       case 'delivered':
         return (
-          <Button onClick={(e) => this.onClick(e, id, status)}>paid</Button>
+          <Button component={Link} className={styles.button} color="primary" variant="outlined"
+            onClick={() => { this.waiterClicked(tableId, 'paid'); }}>
+            paid
+          </Button>
         );
       case 'paid':
         return (
-          <Button onClick={(e) => this.onClick(e, id, status)}>free</Button>
+          <Button component={Link} className={styles.button} color="primary" variant="outlined"
+            onClick={() => { this.waiterClicked(tableId, 'free'); }}>
+          free
+          </Button>
         );
       default:
         return null;
     }
   }
+
 
   render() {
     const { loading: { active, error }, tables } = this.props;
