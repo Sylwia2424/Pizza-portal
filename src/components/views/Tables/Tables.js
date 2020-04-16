@@ -21,7 +21,13 @@ const demoTables = [
   {id: '6', time: '14:30', status: 'paid', order: 456},
 ];
 
+
+
 const Tables = (props) => {
+
+  Tables.propTypes={
+    location: PropTypes.object,
+  };
   const {location} = props;
   return(
     <div className={styles.component}>
@@ -30,6 +36,7 @@ const Tables = (props) => {
         <Button component={Link} to={`/tables/booking/${location.key}`}>Booking</Button>
         <Button component={Link} to={`/tables/event/${location.key}`}>event</Button>
       </div>
+
       <DateAndTimePickers />
       <Toolbar />
       <Paper>
@@ -66,8 +73,5 @@ const Tables = (props) => {
 };
     
 
-Tables.propTypes={
-  location: PropTypes.object,
-};
 
 export default Tables;

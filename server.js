@@ -1,4 +1,5 @@
 /* global require, process */
+const cors = require('cors');
 
 const fs = require('fs');
 const path = require('path');
@@ -10,7 +11,7 @@ const middlewares = jsonServer.defaults({
   noCors: true,
 });
 const port = process.env.PORT || 3131;
-
+server.use(cors({origin: 'http://localhost:3000'}));
 server.get(/^\/panel.*/, (req,res) =>{
   if(req.url === '/panel'){
     req.url += '/';

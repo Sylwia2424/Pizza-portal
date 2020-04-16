@@ -43,7 +43,6 @@ export const fetchFromAPI = () => {
 export const putToTablesStatus = (tables) => {
   return (dispatch, getState) => {
     dispatch(fetchStarted());
-
     Axios.patch(`${api.url}/${api.tables}/${tables}`, {tables})
       .then(res => {
         dispatch(postStatus(res.data));
@@ -77,6 +76,7 @@ export default function reducer(statePart = [], action = {}) {
       };
     }
     case FETCH_ERROR: {
+
       return {
         ...statePart,
         loading: {

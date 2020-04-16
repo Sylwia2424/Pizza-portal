@@ -15,7 +15,7 @@ class Waiter extends React.Component {
     fetchTables: PropTypes.func,
     loading: PropTypes.shape({
       active: PropTypes.bool,
-      error: PropTypes.oneOf([PropTypes.bool, PropTypes.string]),
+      error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
     }),
     tables: PropTypes.any,
     postTableStatus: PropTypes.func,
@@ -34,11 +34,11 @@ class Waiter extends React.Component {
       case 'free':
         return (
           <>
-            <Button component={Link} className={styles.button} color="primary" variant="outlined"
+            <Button component={Link} to={`/waiter/${tableId}`} className={styles.button} color="primary" variant="outlined"
               onClick={() => { this.waiterClicked(tableId, 'thinking'); }}>
               thinking
             </Button>
-            <Button component={Link} className={styles.button} color="primary" variant="outlined"
+            <Button component={Link} to={`/waiter/${tableId}`} className={styles.button} color="primary" variant="outlined"
               onClick={() => { this.waiterClicked(tableId, 'new order'); }}>
               new order
             </Button>
@@ -46,35 +46,35 @@ class Waiter extends React.Component {
         );
       case 'thinking':
         return (
-          <Button component={Link} className={styles.button} color="primary" variant="outlined"
+          <Button component={Link} to={`/waiter/new/${tableId}`} className={styles.button} color="primary" variant="outlined"
             onClick={() => { this.waiterClicked(tableId, 'new order'); }}>
             new order
           </Button>
         );
       case 'ordered':
         return (
-          <Button component={Link} className={styles.button} color="primary" variant="outlined"
+          <Button component={Link} to={`/waiter/${tableId}`} className={styles.button} color="primary" variant="outlined"
             onClick={() => { this.waiterClicked(tableId, 'prepared'); }}>
           prepared
           </Button>
         );
       case 'prepared':
         return (
-          <Button component={Link} className={styles.button} color="primary" variant="outlined"
+          <Button component={Link} to={`/waiter/${tableId}`} className={styles.button} color="primary" variant="outlined"
             onClick={() => { this.waiterClicked(tableId, 'delivered'); }}>
           delivered
           </Button>
         );
       case 'delivered':
         return (
-          <Button component={Link} className={styles.button} color="primary" variant="outlined"
+          <Button component={Link} to={`/waiter/${tableId}`} className={styles.button} color="primary" variant="outlined"
             onClick={() => { this.waiterClicked(tableId, 'paid'); }}>
             paid
           </Button>
         );
       case 'paid':
         return (
-          <Button component={Link} className={styles.button} color="primary" variant="outlined"
+          <Button component={Link} to={`/waiter/${tableId}`} className={styles.button} color="primary" variant="outlined"
             onClick={() => { this.waiterClicked(tableId, 'free'); }}>
           free
           </Button>

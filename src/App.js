@@ -45,18 +45,9 @@ function App() {
                 <Route exact path={`${process.env.PUBLIC_URL}/booking`} component={Booking} />
                 <Route exact path={`${process.env.PUBLIC_URL}/booking/new`} component={NewBooking} />
                 <Route exact path={`${process.env.PUBLIC_URL}/booking/:id`} component={BookingId} />
-                <div className="App">
-                  <header className="App-header">
-                    <a
-                      className="App-link"
-                      href="https://reactjs.org"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                Learn React
-                    </a>
-                  </header>
-                </div>
+                <Route path={process.env.PUBLIC_URL + '/waiter/new'} component={NewOrder} />
+
+
               </Switch>
             </MainLayout>
           </ThemeProvider>
